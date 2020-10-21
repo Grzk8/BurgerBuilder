@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 
 class BurgerIngredient extends Component {
     render(){
+
+        let ingredient = null;
+        
         switch (this.props.type) {
             case ('bread-bottom'):
                 ingredient = <div className='BreadBottom'></div>
@@ -35,7 +38,7 @@ class BurgerIngredient extends Component {
 };
 
 BurgerIngredient.propTypes = {
-    type: propTypes.string.isRequired
+    type: PropTypes.string.isRequired
 };
 
 export default BurgerIngredient;
