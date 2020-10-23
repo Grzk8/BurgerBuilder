@@ -1,5 +1,4 @@
 import React from 'react';
-import BurgerBuilder from '../containers/BurgerBuilder/BurgerBuilder';
 
 import BurgerIngredient from './BurgerIngredient/BurgerIngredient'
 
