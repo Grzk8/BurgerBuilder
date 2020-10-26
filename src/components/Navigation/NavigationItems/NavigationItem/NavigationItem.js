@@ -1,5 +1,4 @@
 import React from 'react';
-import navigationItems from '../NavigationItems';
 
 const navigationItem = (props) => (
     <li className='NavigationItem'>
