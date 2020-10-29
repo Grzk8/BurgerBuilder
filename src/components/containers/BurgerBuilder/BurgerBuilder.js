@@ -6,7 +6,6 @@ import Modal from '../../Layout/Modal/Modal';
 import OrderSummary from '../../Burger/OrderSummary/OrderSummary';
 import Spinner from '../../Layout/Spinner/Spinner';
 
-
 const ingrednient_prices = {
     salad: 0.4,
     cheese: 0.5,

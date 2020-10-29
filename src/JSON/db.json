@@ -1,5 +1,32 @@
 {
   "orders": [
-  
-  ]
+    {
+      "order": {
+        "ingredients": {
+          "salad": 1,
+          "bacon": 0,
+          "cheese": 0,
+          "meat": 1
+        },
+        "price": "5.70",
+        "customer": {
+          "name": "Tester",
+          "address": {
+            "street": "Teststreet 1",
+            "zipCode": "12345"
+          },
+          "email": "test@test.com"
+        }
+      },
+      "id": 1
+    }
+  ],
+  "ingredients": [
+	{
+          "salad": 0,
+          "bacon": 0,
+          "cheese": 0,
+          "meat": 0
+	}
+	]
 }
