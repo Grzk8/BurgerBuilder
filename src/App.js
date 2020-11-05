@@ -1,9 +1,8 @@
 import React from 'react';
-import {Reute, Route, Switch} from 'react-router-dom';
+import { Route, Switch} from 'react-router-dom';
 
 import Layout from './components/Layout/Layout';
 import BurgerBuilder from './components/containers/BurgerBuilder/BurgerBuilder';
-import Ceckout from './components/containers/Checkout/Checkout';
 import Checkout from './components/containers/Checkout/Checkout';
 
 function App() {

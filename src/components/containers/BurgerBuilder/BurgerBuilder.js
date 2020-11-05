@@ -74,31 +74,11 @@ class BurgerBuilder extends Component {
     }
 
     purchaseContinueHandler = () => {
-        //alert ('You continue');
-        // const order = {
-        //     ingredients: this.state.ingredients,
-        //     price: this.state.totalPrice,
-        //     customer: {
-        //         name: 'Tester',
-        //         address: {
-        //             street: 'Teststreet 1',
-        //             zipCode: '12345'
-        //         },
-        //         email: 'test@test.com'
-        //     }
-       
-        // }
-        // fetch('https://burgerbuilder-166a2.firebaseio.com/orders',{
-        //     method: 'POST', 
-        //     body: JSON.stringify({order})})
-        // .then(resp => resp.json())
-        // .then(resp => 
-        //     console.log(resp))
-        // .catch(error => console.log(error));
         const queryParams = [];
         for (let i in this.state.ingredients) {
             queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]));
         };
+        queryParams.push('price=' + this.state.totalPrice);
         const queryString = queryParams.join('&');  
         this.props.history.push({
             pathname: '/checkout/',
