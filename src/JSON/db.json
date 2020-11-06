@@ -19,14 +19,94 @@
         }
       },
       "id": 1
+    },
+    {
+      "order": {
+        "ingredients": {
+          "salad": 1,
+          "bacon": 1,
+          "cheese": 1,
+          "meat": 2
+        },
+        "price": "8.200000000000001",
+        "customer": {
+          "name": "Tester",
+          "address": {
+            "street": "Teststreet 1",
+            "zipCode": "12345"
+          },
+          "email": "test@test.com"
+        }
+      },
+      "id": 2
+    },
+    {
+      "order": {
+        "ingredients": {
+          "salad": 1,
+          "bacon": 0,
+          "cheese": 0,
+          "meat": 1
+        },
+        "price": "5.7",
+        "customer": {
+          "name": "Tester",
+          "address": {
+            "street": "Teststreet 1",
+            "zipCode": "12345"
+          },
+          "email": "test@test.com"
+        }
+      },
+      "id": 3
+    },
+    {
+      "order": {
+        "ingredients": {
+          "salad": 1,
+          "bacon": 1,
+          "cheese": 0,
+          "meat": 1
+        },
+        "price": "6.4",
+        "customer": {
+          "name": "Tester",
+          "address": {
+            "street": "Teststreet 1",
+            "zipCode": "12345"
+          },
+          "email": "test@test.com"
+        }
+      },
+      "id": 4
+    },
+    {
+      "order": {
+        "ingredients": {
+          "salad": 1,
+          "bacon": 1,
+          "cheese": 2,
+          "meat": 2
+        },
+        "price": "8.700000000000001",
+        "customer": {
+          "name": "Tester",
+          "address": {
+            "street": "Teststreet 1",
+            "zipCode": "12345"
+          },
+          "email": "test@test.com"
+        }
+      },
+      "id": 5
     }
   ],
   "ingredients": [
-	{
-          "salad": 0,
-          "bacon": 0,
-          "cheese": 0,
-          "meat": 0
-	}
-	]
+    {
+      "salad": 0,
+      "bacon": 0,
+      "cheese": 0,
+      "meat": 0
+    }
+  ]
 }

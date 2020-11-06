@@ -1,15 +1,52 @@
 import React, {Component} from 'react';
 
 import Button from '../../../../components/Layout/Button/Button';
+import Input from '../../../Layout/Input/Input';
 import Spinner from '../../../Layout/Spinner/Spinner';
 
 class ContactData extends Component {
     state = {
-        name: '',
-        email: '',
-        address: {
-            street: '',
-            postalCode: '',
+        orderForm: {
+            name: {
+                elementType: 'input',
+                elementConfig: {
+                    type: 'text',
+                    placeholder: 'Your Name',
+                },
+                value: ''
+            },
+            street:  {
+                elementType: 'input',
+                elementConfig: {
+                    type: 'text',
+                    placeholder: 'Street',
+                },
+                value: ''
+            },
+            zipCode:  {
+                elementType: 'input',
+                elementConfig: {
+                    type: 'text',
+                    placeholder: 'ZIP',
+                },
+                value: ''
+            },
+            email:  {
+                elementType: 'input',
+                elementConfig: {
+                    type: 'email',
+                    placeholder: 'Your Mail',
+                },
+                value: ''
+            },
+            deliveryMethod: {
+                elementType: 'select',
+                elementConfig: {
+                    options: [
+                        {value: 'fastest', displayValue: 'Fastest'},
+                        {value: 'cheapest', displayValue: 'Cheapest'}]
+                }
+            }
         },
         loading: false
     }
@@ -17,20 +54,14 @@ class ContactData extends Component {
     orderHandler = (event) => {
         event.preventDefault();
         this.setState({loading: true});
+        
         const order = {
             ingredients: this.props.ingredients,
             price: this.props.price,
-            customer: {
-                name: 'Tester',
-                address: {
-                    street: 'Teststreet 1',
-                    zipCode: '12345'
-                },
-                email: 'test@test.com'
-            }
+            
        
         }
-        fetch('https://burgerbuilder-166a2.firebaseio.com/orders',{
+        fetch('http://localhost:3000/orders',{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -44,14 +75,41 @@ class ContactData extends Component {
         this.props.history.push('/');
     }
 
+    inputChangedHandler = (event, inputIdentifier) => {
+        const updatedOrderForm = {
+            ...this.state.orderForm
+        }
+        // klonuję stan ale bez klonowania głębokiego, nie mam dostępu do wartości wewnątrz name, street itd
+        // muszę sklonować je osobno:    , teraz mam dostęp do elementType, value nie mam do elementConfig 
+        let updatedFormElement = {
+            ...updatedOrderForm[inputIdentifier]
+        }
+        updatedFormElement = event.target.value;
+        updatedOrderForm[inputIdentifier] = updatedFormElement;
+        this.setState({orderForm: updatedOrderForm});
+    };
+
 
     render () {
+        const formElementsArray = [];
+        for (let key in this.state.orderForm) {
+            formElementsArray.push({
+                id:key,
+                config: this.state.orderForm[key]
+            })
+        }
+
         let form = (
-            <form>
-                <input className='Input' type='text' name='name' placeholder='Your Name'/>
-                <input className='Input' type='email' name='email' placeholder='Your email'/>
-                <input className='Input' type='text' name='street' placeholder='Your street'/>
-                <input className='Input' type='text' name='postal' placeholder='Postal code'/>
+            <form onSubmit={this.orderHandler}>
+                <Input elementType='' elementConfig='' value='' />
+                {formElementsArray.map(formElement => (
+                    <Input 
+                        key={formElement.id}
+                        elementType={formElement.config.elementType}
+                        elementConfig={formElement.config.elementConfig}
+                        value={formElement.config.value}
+                        changed={(event) => this.inputChangedHandler(event, formElement.id)}/>
+                ))}
                 <Button btnType='Success' clicked={this.orderHandler}>ORDER</Button>
         </form>
         );

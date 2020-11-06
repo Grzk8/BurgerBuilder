@@ -8,7 +8,7 @@ class Orders extends Component {
         loading: true
     }
     componentDidMount() {
-        fetch('https://burgerbuilder-166a2.firebaseio.com/orders/order1')
+        fetch('http://localhost:3000/orders')
         .then(response => response.json())
         .then (resp => {
             console.log(resp)
