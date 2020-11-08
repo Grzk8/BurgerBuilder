@@ -2,11 +2,15 @@ import React from 'react';
 
 const input = (props) => {
     let inputElement = null;
+    const inputClasses = [inputElement];
 
+    if (props.invalid && props.shouldValidate && props.touched) {
+        inputClasses.push('Invalid');
+    }
     switch (props.elementType) {
         case ( 'input'):
             inputElement = <input 
-                className='InputElement' 
+                className={inputClasses.join(' ')} 
                 {...props.elementConfig} 
                 value={props.value} 
                 onChange={props.changed}/>;
@@ -36,7 +40,7 @@ const input = (props) => {
                 className='InputElement' 
                 {...props.elementConfig} 
                 value={props.value} 
-                onChange={props.changed}/>
+                onChange={props.changed}/> 
     }
 
     return (
