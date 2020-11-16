@@ -1,17 +1,10 @@
 {
-  "orders": [
+  "ingredients": [
     {
-      "order": {
-        "ingredients": {
-          "salad": 1,
-          "bacon": 1,
-          "cheese": 1,
-          "meat": 2
-        },
-        "price": "8.200000000000001",
-        "orderData": {}
-      },
-      "id": 1
-    }
+        "salad": 0,
+        "bacon": 0,
+        "cheese": 0,
+        "meat": 0
+     }
   ]
 }

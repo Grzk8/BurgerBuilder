@@ -5,7 +5,7 @@ import Burger from '../../Burger/Burger';
 import BuildControls from '../../../components/Burger/BuildControls/BuildControls';
 import Modal from '../../Layout/Modal/Modal';
 import OrderSummary from '../../Burger/OrderSummary/OrderSummary';
-import * as actionTypes from '../../../store/actions';
+import * as actionTypes from '../../../store/actions/actionTypes';
 
 
 class BurgerBuilder extends Component {

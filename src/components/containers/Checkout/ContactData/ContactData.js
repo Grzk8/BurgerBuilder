@@ -96,7 +96,7 @@ class ContactData extends Component {
             (this.setState({loading: false})))
         .catch(error => 
         (this.setState({loading: false})));
-        this.props.history.push('/');
+        this.props.history.push('/BurgerBuilder');
     }
 
     checkValidity(value, rules) {
