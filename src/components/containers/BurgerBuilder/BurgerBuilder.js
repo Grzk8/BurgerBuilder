@@ -6,6 +6,8 @@ import BuildControls from '../../../components/Burger/BuildControls/BuildControl
 import Modal from '../../Layout/Modal/Modal';
 import OrderSummary from '../../Burger/OrderSummary/OrderSummary';
 import * as burgerBuilderActions from '../../../store/actions/index';
+import Axios from 'axios';
+
 
 
 class BurgerBuilder extends Component {
@@ -103,4 +105,4 @@ const mapDispatchToProps = dispatch => {
         onInitIngredients: () => dispatch(burgerBuilderActions.initIngredients())
     }    
 }
-export default connect(mapStateToProps, mapDispatchToProps)(BurgerBuilder);
+export default connect(mapStateToProps, mapDispatchToProps)(BurgerBuilder, Axios);
