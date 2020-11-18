@@ -7,99 +7,42 @@
   },
   "orders": [
     {
-      "order": {
+      "orderData": {
         "ingredients": {
           "salad": 1,
           "bacon": 1,
           "cheese": 1,
-          "meat": 1
+          "meat": 0
         },
-        "price": 6.9,
+        "price": 5.6000000000000005,
         "orderData": {
-          "name": "",
-          "street": "",
-          "zipCode": "",
-          "email": "",
-          "deliveryMethod": ""
+          "name": "tre",
+          "street": "rete",
+          "zipCode": "55555",
+          "email": "er@65.oi",
+          "deliveryMethod": "fastest"
         }
       },
-      "id": 1
+      "id": 6
     },
     {
-      "order": {
-        "ingredients": {
-          "salad": 1,
-          "bacon": 0,
-          "cheese": 0,
-          "meat": 2
-        },
-        "price": 9.900000000000002,
-        "orderData": {
-          "name": "",
-          "street": "",
-          "zipCode": "",
-          "email": "",
-          "deliveryMethod": ""
-        }
-      },
-      "id": 2
-    },
-    {
-      "order": {
+      "orderData": {
         "ingredients": {
           "salad": 0,
           "bacon": 1,
-          "cheese": 1,
+          "cheese": 0,
           "meat": 0
         },
-        "price": 5.2,
+        "price": 4.7,
         "orderData": {
-          "name": "gg",
-          "street": "ff",
-          "zipCode": "gf",
-          "email": "fgf",
-          "deliveryMethod": "cheapest"
+          "name": "test",
+          "street": "street",
+          "zipCode": "12345",
+          "email": "12@qq.o",
+          "deliveryMethod": "fastest"
         }
       },
-      "id": 3
-    },
-    {
-      "order": {
-        "ingredients": {
-          "salad": 1,
-          "bacon": 1,
-          "cheese": 1,
-          "meat": 0
-        },
-        "price": 5.6000000000000005,
-        "orderData": {
-          "name": "imie",
-          "street": "nazw",
-          "zipCode": "434",
-          "email": "4@rr",
-          "deliveryMethod": "cheapest"
-        }
-      },
-      "id": 4
-    },
-    {
-      "order": {
-        "ingredients": {
-          "salad": 1,
-          "bacon": 1,
-          "cheese": 1,
-          "meat": 0
-        },
-        "price": 5.6000000000000005,
-        "orderData": {
-          "name": "32",
-          "street": "232",
-          "zipCode": "4",
-          "email": "ee",
-          "deliveryMethod": ""
-        }
-      },
-      "id": 5
+      "id": 7
     }
   ]
 }

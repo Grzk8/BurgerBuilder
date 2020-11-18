@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+
 import Order from '../../../../components/Order/Order';
 
 class Orders extends Component {
@@ -7,6 +8,7 @@ class Orders extends Component {
         orders: [],
         loading: true
     }
+    
     componentDidMount() {
         fetch('http://localhost:3000/orders')
         .then(response => response.json())
@@ -18,20 +20,21 @@ class Orders extends Component {
                     ...resp[key], id: key
                 })
             }
-            this.setState({loading: false});
+            this.setState({loading: false, orders: fetchedOrders});
         })
         .catch(err => {
             this.setState({loading: false});
         })
     }
     render() {
+        console.log(this.state.orders)
         return(
             <>
                 {this.state.orders.map(order => (
                     <Order 
                     key={order.id}
-                    ingredients={order.ingredients}
-                    price={+order.price}/>
+                    ingredients={order.orderData.ingredients}
+                    price={+order.orderData.price}/>
                 ))}
             </>
 

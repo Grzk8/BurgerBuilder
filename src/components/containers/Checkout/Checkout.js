@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Route } from 'react-router-dom';
+import { Redirect, Route } from 'react-router-dom';
 import {connect} from 'react-redux';
 
 import CheckoutSummary from '../../Order/CheckoutSummary/CheckoutSummary';
@@ -16,25 +16,27 @@ class Checkout extends Component {
     };
 
     render () {
-        return (
-            <>
-                <CheckoutSummary 
-                    ingredients={this.props.ings}
-                    checkoutCancelled={this.checkoutCancelledHandler}
-                    checkoutContinued={this.checkoutContinuedHandler}/>
-                <Route 
-                    path={this.props.match.path + '/contact-data'}
-                    component={ContactData} /> 
-            </>
-
-        )
-    }
+        let summary = <Redirect to="/BurgerBuilder"/>
+        if (this.props.ings) {
+            summary = (
+                <>
+                    <CheckoutSummary 
+                        ingredients={this.props.ings}
+                        checkoutCancelled={this.checkoutCancelledHandler}
+                        checkoutContinued={this.checkoutContinuedHandler}/>
+                    <Route 
+                        path={this.props.match.path + '/contact-data'}
+                        component={ContactData} />
+                </> );
+        };
+        return summary
+    };
 };
 
 
 const mapStateToProps = state => {
     return {
-        ings: state.ingredients
+        ings: state.burgerBuilder.ingredients    // mamy dwa reduktory więc wybieramy właściwy -> state.burgerBuilder
     }
 };
 

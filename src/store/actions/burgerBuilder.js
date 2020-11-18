@@ -1,4 +1,3 @@
-import axios from 'axios';
 import * as actionTypes from './actionTypes';
 
 export const addIngredient = (name) => {
@@ -29,9 +28,10 @@ export const fetchIngredientsFailed = () => {
 }
 export const initIngredients = () => {
     return dispatch => {
-        axios.get('http://localhost:3000/ingredients')
+        fetch('http://localhost:3000/ingredients')
+        .then(response => response.json())
         .then(response => {
-            dispatch(setIngrenients(response.data));
+            dispatch(setIngrenients(response));
         })
         .catch(error => {
             dispatch(fetchIngredientsFailed());

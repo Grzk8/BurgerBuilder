@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import Button from '../../../../components/Layout/Button/Button';
 import Input from '../../../Layout/Input/Input';
 import Spinner from '../../../Layout/Spinner/Spinner';
+import * as actions from '../../../../store/actions/index';
 
 
 class ContactData extends Component {
@@ -71,18 +72,16 @@ class ContactData extends Component {
                         {value: 'fastest', displayValue: 'Fastest'},
                         {value: 'cheapest', displayValue: 'Cheapest'}]
                 },
-                value: '',
+                value: 'fastest',
                 validation: {}, // usuwa błąd walidacji przy wyborze opcji
                 valid: true
             }
         },
-        formIsValid: false,
-        loading: false
+        formIsValid: false
     }
 
     orderHandler = (event) => {
         event.preventDefault();
-        this.setState({loading: true});
         const formData = {};
         for (let formElementIdentifer in this.state.orderForm) {
             formData[formElementIdentifer] = this.state.orderForm[formElementIdentifer].value;
@@ -91,26 +90,15 @@ class ContactData extends Component {
             ingredients: this.props.ings,
             price: this.props.price,
             orderData: formData
-       
-        }
-        fetch('http://localhost:3000/orders',{
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-              }, 
-            body: JSON.stringify({order})})
-        .then(resp => resp.json())
-        .then(resp => 
-            (this.setState({loading: false})))
-        .catch(error => 
-        (this.setState({loading: false})));
-        this.props.history.push('/BurgerBuilder');
-    }
+        };
+        
+        this.props.onOrderBurger(order);
+    };
 
     checkValidity(value, rules) {
         let isValid = true;
         if (!rules) {
-            return true; // usuwa błąd walidacji przy wyborze opcji
+            return true;
         }
         
         if (rules.required) {
@@ -156,7 +144,7 @@ class ContactData extends Component {
         for (let inputIdentifier in updatedOrderForm) {
             formIsValid = updatedOrderForm[inputIdentifier].valid && formIsValid;
         }
-        this.setState({orderForm: updatedOrderForm});
+        this.setState({orderForm: updatedOrderForm, formIsValid: formIsValid});
     };
 
 
@@ -185,7 +173,7 @@ class ContactData extends Component {
                 <Button btnType='Success' disabled={!this.state.formIsValid} clicked={this.orderHandler}>ORDER</Button>
         </form>
         );
-        if (this.state.loading) {
+        if (this.props.loading) {
             form = <Spinner />
         }
         return (
@@ -199,8 +187,16 @@ class ContactData extends Component {
 
 const mapStateToProps = state => {
     return {
-        ings: state.ingredients,
-        price: state.totalPrice
-    }
+        ings: state.burgerBuilder.ingredients,   // mamy dwa reduktory więc wybieramy właściwy -> state.burgerBuilder
+        price: state.burgerBuilder.totalPrice,
+        loading: state.order.loading
+    };
 };
-export default connect(mapStateToProps)(ContactData);
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onOrderBurger: (orderData) => dispatch(actions.purchaseBurger(orderData))
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContactData);
