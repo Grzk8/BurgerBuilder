@@ -18,14 +18,14 @@ export const purchaseBurgerFail = (error) => {
 export const purchaseBurgerStart = () => {
     return {
         type: actionsType.PURCHASE_BURGER_START
-    }
-}
+    };
+};
 
 export const purchaseBurger = (orderData) => {
     let response = null;
     return dispatch => {
         dispatch(purchaseBurgerStart());
-        fetch('http://localhost:3000/orders',{
+        fetch('https://api.npoint.io/944cecc87fb14ec6dbe0/orders',{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -38,5 +38,52 @@ export const purchaseBurger = (orderData) => {
             dispatch(purchaseBurgerSucces(response, orderData)))
         .catch(error => 
         dispatch(purchaseBurgerFail(error)));
-    }
-}
+    };
+};
+
+export const purchaseInit = () => {
+    return {
+        type: actionsType.PURCHASE_INIT
+    };
+};
+
+export const fetchOrderStart = () => {
+    return {
+        type: actionsType.FETCH_ORDERS_START
+    };
+};
+
+export const fetchOrderSucces= (orders) => {
+    return {
+        type: actionsType.FETCH_ORDERS_SUCCESS,
+        orders: orders
+    };
+};
+
+export const fetchOrderFail= (error) => {
+    return {
+        type: actionsType.FETCH_ORDERS_FAIL,
+        error: error
+    };
+};
+
+export const fetchOrders = () => {
+    return dispatch => {
+        dispatch(fetchOrderStart());
+        fetch('https://api.npoint.io/944cecc87fb14ec6dbe0/orders')
+        .then(response => response.json())
+        .then (resp => {
+            console.log(resp)
+            const fetchedOrders = [];
+            for (let key in resp) {
+                fetchedOrders.push({
+                    ...resp[key], id: key
+                });
+            };
+            dispatch(fetchOrderSucces(fetchedOrders));
+        })
+        .catch(err => {
+            dispatch(fetchOrderFail(err));
+        });
+    };
+};

@@ -28,7 +28,7 @@ export const fetchIngredientsFailed = () => {
 }
 export const initIngredients = () => {
     return dispatch => {
-        fetch('http://localhost:3000/ingredients')
+        fetch('https://api.npoint.io/944cecc87fb14ec6dbe0/ingredients')
         .then(response => response.json())
         .then(response => {
             dispatch(setIngrenients(response));

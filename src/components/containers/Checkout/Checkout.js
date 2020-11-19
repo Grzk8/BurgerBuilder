@@ -18,8 +18,10 @@ class Checkout extends Component {
     render () {
         let summary = <Redirect to="/BurgerBuilder"/>
         if (this.props.ings) {
+            const purchasedRedirect = this.props.purchased ? <Redirect to="/BurgerBuilder" /> : null
             summary = (
                 <>
+                    {purchasedRedirect}
                     <CheckoutSummary 
                         ingredients={this.props.ings}
                         checkoutCancelled={this.checkoutCancelledHandler}
@@ -36,7 +38,8 @@ class Checkout extends Component {
 
 const mapStateToProps = state => {
     return {
-        ings: state.burgerBuilder.ingredients    // mamy dwa reduktory więc wybieramy właściwy -> state.burgerBuilder
+        ings: state.burgerBuilder.ingredients,    // mamy dwa reduktory więc wybieramy właściwy -> state.burgerBuilder
+        purchased: state.order.purchased
     }
 };
 
