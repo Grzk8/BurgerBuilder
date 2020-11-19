@@ -7,6 +7,7 @@ const navigationItems = () => (
     <ul className='NavigationItems'>
         < NavigationItem link='/BurgerBuilder' exact={checkPropTypes.exact} >Burger Builder</ NavigationItem>
         < NavigationItem link='/orders'>Orders</ NavigationItem>
+        < NavigationItem link='/auth'>Authenticate</ NavigationItem>
     </ul>
 );
 
