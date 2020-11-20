@@ -28,7 +28,7 @@ export const fetchIngredientsFailed = () => {
 }
 export const initIngredients = () => {
     return dispatch => {
-        fetch('https://api.npoint.io/944cecc87fb14ec6dbe0/ingredients')
+        fetch('https://burgerbuilder-166a2.firebaseio.com/ingredients.json')
         .then(response => response.json())
         .then(response => {
             dispatch(setIngrenients(response));

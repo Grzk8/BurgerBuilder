@@ -25,7 +25,7 @@ export const purchaseBurger = (orderData) => {
     let response = null;
     return dispatch => {
         dispatch(purchaseBurgerStart());
-        fetch('https://api.npoint.io/944cecc87fb14ec6dbe0/orders',{
+        fetch('https://burgerbuilder-166a2.firebaseio.com/orders.json',{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -70,7 +70,7 @@ export const fetchOrderFail= (error) => {
 export const fetchOrders = () => {
     return dispatch => {
         dispatch(fetchOrderStart());
-        fetch('https://api.npoint.io/944cecc87fb14ec6dbe0/orders')
+        fetch('https://burgerbuilder-166a2.firebaseio.com/orders.json')
         .then(response => response.json())
         .then (resp => {
             console.log(resp)
