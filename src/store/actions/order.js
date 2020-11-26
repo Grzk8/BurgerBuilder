@@ -67,10 +67,10 @@ export const fetchOrderFail= (error) => {
     };
 };
 
-export const fetchOrders = () => {
+export const fetchOrders = (token) => {
     return dispatch => {
         dispatch(fetchOrderStart());
-        fetch('https://burgerbuilder-166a2.firebaseio.com/orders.json')
+        fetch('https://burgerbuilder-166a2.firebaseio.com/orders.json?auth=' + token)
         .then(response => response.json())
         .then (resp => {
             console.log(resp)
