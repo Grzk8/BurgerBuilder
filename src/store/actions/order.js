@@ -1,6 +1,7 @@
 import * as actionsType from './actionTypes';
+import axios from 'axios';
 
-export const purchaseBurgerSucces = (id, orderData) => {
+export const purchaseBurgerSuccess = (id, orderData) => {
     return {
         type: actionsType.PURCHASE_BURGER_SUCCES,
         orderId: id,
@@ -21,11 +22,11 @@ export const purchaseBurgerStart = () => {
     };
 };
 
-export const purchaseBurger = (orderData) => {
+export const purchaseBurger = (orderData, token) => {
     let response = null;
     return dispatch => {
         dispatch(purchaseBurgerStart());
-        fetch('https://burgerbuilder-166a2.firebaseio.com/orders.json',{
+        fetch('https://burgerbuilder-166a2.firebaseio.com/orders.json?auth=' + token,{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -35,7 +36,7 @@ export const purchaseBurger = (orderData) => {
         .then(resp => 
             response = resp,
             console.log(response),
-            dispatch(purchaseBurgerSucces(response, orderData)))
+            dispatch(purchaseBurgerSuccess(response.data.name, orderData)))
         .catch(error => 
         dispatch(purchaseBurgerFail(error)));
     };
@@ -70,20 +71,19 @@ export const fetchOrderFail= (error) => {
 export const fetchOrders = (token) => {
     return dispatch => {
         dispatch(fetchOrderStart());
-        fetch('https://burgerbuilder-166a2.firebaseio.com/orders.json?auth=' + token)
-        .then(response => response.json())
-        .then (resp => {
-            console.log(resp)
-            const fetchedOrders = [];
-            for (let key in resp) {
-                fetchedOrders.push({
-                    ...resp[key], id: key
-                });
-            };
-            dispatch(fetchOrderSucces(fetchedOrders));
-        })
-        .catch(err => {
-            dispatch(fetchOrderFail(err));
-        });
+        axios.get( 'https://burgerbuilder-166a2.firebaseio.com/orders.json?auth=' + token )
+            .then( res => {
+                const fetchedOrders = [];
+                for ( let key in res.data ) {
+                    fetchedOrders.push( {
+                        ...res.data[key],
+                        id: key
+                    } );
+                }
+                dispatch(fetchOrderSucces(fetchedOrders));
+            } )
+            .catch( err => {
+                dispatch(fetchOrderFail(err));
+            } );
     };
 };

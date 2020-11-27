@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
+import {Redirect} from 'react-router-dom';
 
 import Input from '../Layout/Input/Input';
 import Button from '../Layout/Button/Button';
@@ -128,9 +129,15 @@ class Auth extends Component {
             );
         };
 
+        let authRedirect = null;
+        if (this.props.isAuthenticated) {
+            authRedirect = <Redirect to='/BurgerBuilder'/>
+        }
+
 
         return(
             <div className='Auth'>
+                {authRedirect}
                 {errorMessage}
                 <form onSubmit={this.submitHandler}>
                     {form}
@@ -138,7 +145,7 @@ class Auth extends Component {
                 </form>
         <Button
             clicked={this.swithAuthModeHandler} 
-            btnType='Danger'>{this.state.isSignup ? 'SIGN IN' : 'SIGN UP'}
+            btnType='Danger'>{this.state.isSignup ? 'LOGIN' : 'SIGNUP'}
         </Button>
             </div>
         );
@@ -148,7 +155,8 @@ class Auth extends Component {
 const mapStatrToProps = state => {
     return {
         loading: state.auth.loading,
-        error: state.auth.error
+        error: state.auth.error,
+        isAuthenticated: state.auth.token !==null
     };
 };
 
