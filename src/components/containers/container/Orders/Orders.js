@@ -8,7 +8,7 @@ import Spinner from '../../../Layout/Spinner/Spinner';
 class Orders extends Component {
     
     componentDidMount() {
-        this.props.onFetchOrders(this.props.token);
+        this.props.onFetchOrders(this.props.token, this.props.userId);
     }
     render() {
         console.log(this.props.orders)
@@ -17,8 +17,8 @@ class Orders extends Component {
             orders = ( this.props.orders.map(order => (
                     <Order 
                     key={order.id}
-                    ingredients={order.orderData.ingredients}
-                    price={+order.orderData.price}/>
+                    ingredients={order.ingredients}
+                    price={+order.price}/>
                 ))
             );
         }
@@ -34,12 +34,13 @@ const mapStateToProps = state => {
     return {
         orders: state.order.orders,
         loading: state.order.loading,
-        token: state.auth.token
+        token: state.auth.token,
+        userId: state.auth.userId
     }
 };
 const mapDispatchToProps = dispatch => {
     return {
-        onFetchOrders: (token) => dispatch(actions.fetchOrders(token)) 
+        onFetchOrders: (token, userId) => dispatch(actions.fetchOrders(token, userId)) 
     }
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Orders);

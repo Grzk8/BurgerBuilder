@@ -22,23 +22,17 @@ export const purchaseBurgerStart = () => {
     };
 };
 
-export const purchaseBurger = (orderData, token) => {
-    let response = null;
+export const purchaseBurger = ( orderData, token ) => {
     return dispatch => {
-        dispatch(purchaseBurgerStart());
-        fetch('https://burgerbuilder-166a2.firebaseio.com/orders.json?auth=' + token,{
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-              }, 
-            body: JSON.stringify({orderData})})
-        .then(resp => resp.json())
-        .then(resp => 
-            response = resp,
-            console.log(response),
-            dispatch(purchaseBurgerSuccess(response.data.name, orderData)))
-        .catch(error => 
-        dispatch(purchaseBurgerFail(error)));
+        dispatch( purchaseBurgerStart() );
+        axios.post( 'https://burgerbuilder-166a2.firebaseio.com/orders.json?auth=' + token, orderData )
+            .then( response => {
+                console.log( response.data );
+                dispatch( purchaseBurgerSuccess( response.data.name, orderData ) );
+            } )
+            .catch( error => {
+                dispatch( purchaseBurgerFail( error ) );
+            } );
     };
 };
 
@@ -68,10 +62,11 @@ export const fetchOrderFail= (error) => {
     };
 };
 
-export const fetchOrders = (token) => {
+export const fetchOrders = (token, userId) => {
     return dispatch => {
         dispatch(fetchOrderStart());
-        axios.get( 'https://burgerbuilder-166a2.firebaseio.com/orders.json?auth=' + token )
+        const queryParams = '?auth=' + token + '&orderBy="userId"&equalTo="' + userId + '"';
+        axios.get( 'https://burgerbuilder-166a2.firebaseio.com/orders.json?auth=' + queryParams )
             .then( res => {
                 const fetchedOrders = [];
                 for ( let key in res.data ) {
