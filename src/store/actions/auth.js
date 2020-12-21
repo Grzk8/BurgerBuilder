@@ -30,7 +30,7 @@ export const logout = () => {
     }
 };
 
-export const logoutSucced = () => {
+export const logoutSucceed = () => {
     return {
         type: actionTypes.AUTH_LOGOUT
     };
@@ -66,6 +66,6 @@ export const setAuthRedirectPath = (path) => {
 
 export const authCheckState = () => {
     return {
-        action: actionTypes.AUTH_CHECK_STATE
-    }
-}
+        type: actionTypes.AUTH_CHECK_STATE
+    };
+};

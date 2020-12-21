@@ -24,17 +24,10 @@ export const setIngrenients = (ingredients) => {
 export const fetchIngredientsFailed = () => {
     return {
         type: actionTypes.FETCH_INGRENIENTS_FAILED
-    }
-}
-export const initIngredients = () => {
-    return dispatch => {
-        fetch('https://burgerbuilder-166a2.firebaseio.com/ingredients.json')
-        .then(response => response.json())
-        .then(response => {
-            dispatch(setIngrenients(response));
-        })
-        .catch(error => {
-            dispatch(fetchIngredientsFailed());
-        });
     };
-}
+};
+export const initIngredients = () => {
+    return {
+        type: actionTypes.INIT_INGREDIENTS
+    };
+};
